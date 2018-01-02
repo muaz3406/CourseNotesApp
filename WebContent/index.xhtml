@@ -15,8 +15,41 @@
       xmlns:permittedTaglibs="http://jakarta.apache.org/taglibs/standard/permittedTaglibs"
       xmlns:scriptfree="http://jakarta.apache.org/taglibs/standard/scriptfree"
       xmlns:mj="http://mojarra.dev.java.net/mojarra_ext">
-	<body>
-		<form action="">
-		</form>
-	</body>
+	<h:body>
+		<h:form id="kayit_formu">
+			<h:panelGrid columns="4">
+				<h:outputText value="Adınız:"/>
+				<h:inputText value="#{d.isim}" required="true"/>
+				<h:outputText value="Soyadınız:"/>
+				<h:inputText value="#{d.soyisim}" required="true"/>
+				<h:outputText value="E-posta adresiniz:"/>
+				<h:inputText value="#{d.esposta}" required="true" validatorMessage="Geçersiz E-posta adresi!">
+					<f:validateRegex pattern="^[_A-Za-z0-9-+\]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$"/>
+				</h:inputText>
+				<h:outputText value="Sisteme giriş parolanız:"/>
+				<h:inputSecret value="#{d.parola}" required="true"/> 
+			</h:panelGrid>
+			<h:panelGrid columns="4">
+				<h:outputText value="Bolumunuzu seçiniz:"/>
+				<h:selectOneMenu value="#{d.bolum}">
+					<f:selectItems value="#{d.getBolumler()}"/>
+				</h:selectOneMenu> 
+				<h:outputText value="Cinsiyetiniz:"/>
+				<h:selectOneRadio value="#{d.cinsiyet}">
+					<f:selectItems value="#{d.getCinsiyetler()}"/>
+				</h:selectOneRadio>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+				<h:outputText value="Doneminiz nedir?"/>
+				<h:selectOneRadio value="#{d.donem_seviyesi}">
+					<f:selectItems value="#{d.getDonemler()}"/>
+				</h:selectOneRadio>
+			</h:panelGrid>
+			<h:commandButton value="GÖNDER" action="mainpage.xhtml"/>
+		</h:form>
+	</h:body>
 </html>
